@@ -90,7 +90,8 @@ class RedditService {
     }
 
     public async searchSubreddits(
-        query: string
+        query: string,
+        includeNsfw: boolean = false
     ): Promise<string[]> {
         const searchedSubreddit =
             await this.reddit.searchSubredditNames({

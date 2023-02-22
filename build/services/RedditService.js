@@ -61,7 +61,7 @@ class RedditService {
         const popSubreddits = await this.reddit.getPopularSubreddits({ limit });
         return popSubreddits;
     }
-    async searchSubreddits(query) {
+    async searchSubreddits(query, includeNsfw = false) {
         const searchedSubreddit = await this.reddit.searchSubredditNames({
             query,
             includeNsfw: true,
