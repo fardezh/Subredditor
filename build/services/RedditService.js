@@ -4,19 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const snoowrap_1 = __importDefault(require("snoowrap"));
-const env_1 = require("../config/env");
 class RedditService {
-    constructor() {
-        this.clientId = env_1.rdClientId;
-        this.clientSecret = env_1.rdClientSecret;
-        this.accessToken = env_1.rdAccessToken;
-        this.refreshToken = env_1.rdRefreshToken;
+    constructor(clientId, clientSecret, accessToken, refreshToken) {
         this.reddit = new snoowrap_1.default({
-            userAgent: "string!",
-            clientId: this.clientId,
-            clientSecret: this.clientSecret,
-            refreshToken: this.refreshToken,
-            accessToken: this.accessToken,
+            userAgent: "user-agent",
+            clientId: clientId,
+            clientSecret: clientSecret,
+            refreshToken: refreshToken,
+            accessToken: accessToken,
         });
     }
     postMinifier(posts) {
@@ -61,12 +56,10 @@ class RedditService {
         const popSubreddits = await this.reddit.getPopularSubreddits({ limit });
         return popSubreddits;
     }
-    async searchSubreddits(query, includeNsfw = false) {
+    async searchSubreddits(query) {
         const searchedSubreddit = await this.reddit.searchSubredditNames({
             query,
-            includeNsfw: true,
         });
-        console.log(searchedSubreddit);
         return searchedSubreddit;
     }
 }

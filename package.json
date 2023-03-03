@@ -2,23 +2,18 @@
     "name": "Subredditor",
     "version": "1.0.0",
     "description": "",
-    "main": "./build/index.js",
+    "main": "build/core/bot.js",
     "scripts": {
         "build": "tsc",
-        "test": "jest",
-        "start": "node ./build/index.js",
-        "dev": "nodemon --exec cross-env NODE_ENV=development node -r dotenv/config ./build/index.js"
+        "start": "node build/core/bot.js",
+        "dev": "nodemon --exec cross-env NODE_ENV=development node -r dotenv/config build/core/bot.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@jest/globals": "^29.4.3",
-        "@types/jest": "^29.4.0",
         "cross-env": "^7.0.3",
         "dotenv": "^16.0.3",
-        "jest": "^29.4.3",
-        "ts-jest": "^29.0.5",
         "ts-node": "^10.9.1",
         "typescript": "^4.9.5"
     },

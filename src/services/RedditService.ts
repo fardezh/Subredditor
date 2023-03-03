@@ -1,29 +1,25 @@
 import Snoowrap from "snoowrap";
-import {
-    rdAccessToken,
-    rdClientId,
-    rdClientSecret,
-    rdRefreshToken,
-} from "../config/env";
+import * as config from "../config";
 
 type redditPostDataList = {
     [key: string]: any;
 }[];
 
 class RedditService {
-    private clientId: string = rdClientId;
-    private clientSecret: string = rdClientSecret;
-    private accessToken: string = rdAccessToken;
-    private refreshToken: string = rdRefreshToken;
     private reddit: Snoowrap;
 
-    public constructor() {
+    public constructor(
+        clientId: string,
+        clientSecret: string,
+        accessToken: string,
+        refreshToken: string
+    ) {
         this.reddit = new Snoowrap({
-            userAgent: "string!",
-            clientId: this.clientId,
-            clientSecret: this.clientSecret,
-            refreshToken: this.refreshToken,
-            accessToken: this.accessToken,
+            userAgent: "user-agent",
+            clientId: clientId,
+            clientSecret: clientSecret,
+            refreshToken: refreshToken,
+            accessToken: accessToken,
         });
     }
 
@@ -90,15 +86,12 @@ class RedditService {
     }
 
     public async searchSubreddits(
-        query: string,
-        includeNsfw: boolean = false
+        query: string
     ): Promise<string[]> {
         const searchedSubreddit =
             await this.reddit.searchSubredditNames({
                 query,
-                includeNsfw: true,
             });
-        console.log(searchedSubreddit);
 
         return searchedSubreddit;
     }
